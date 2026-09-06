@@ -1,13 +1,24 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.1
+Date: 2026-09-06
+  Info:
+    - Every prototype and setting this mod defines is now namespaced under lhe-, so the mod can be enabled alongside vulcanus-lava-power.
+    - The heating tower is renamed to Filtered Lava Heating Tower to tell it apart from the upstream Lava Heating Tower.
+    - Upgrade warning: because the prototypes were renamed, a world saved with 1.0.0 loses every placed Lava Heating Tower entity, and the startup setting values chosen under 1.0.0 fall back to the new defaults; the old prototype and setting names no longer exist, so nothing carries over.
+  Changes:
+    - Replaced the "! vulcanus-lava-power" incompatibility with a "? vulcanus-lava-power" optional dependency, which pins load order without blocking the other mod.
+    - Renamed the filtered-lava fluid to lhe-filtered-lava, the lava sluicing recipe to lhe-lava-sluicing, and the lava heating tower entity, item and recipe to lhe-lava-heating-tower.
+    - Renamed the startup settings vlp-power-production, vlp-lava-energy, vlp-sluicing-stone and vlp-sluicing-output to lhe-power-production, lhe-lava-energy, lhe-sluicing-stone and lhe-sluicing-output.
+---------------------------------------------------------------------------------------------------
 Version: 1.0.0
 Date: 2026-09-06
   Info:
     - Initial release of this fork of Vulcanus Lava Power by Orbital917, renamed to Lava Heat Extraction.
-    - Every prototype and setting this mod defines is namespaced under lhe-, so it can be enabled alongside vulcanus-lava-power.
+    - Cannot be enabled alongside vulcanus-lava-power; the two mods define the same prototypes.
   Features:
-    - Added the lhe-filtered-lava fluid and a lava sluicing recipe that turns 500 lava into 240 filtered lava and 30 stone in a foundry over 4 seconds.
+    - Added the filtered-lava fluid and a lava sluicing recipe that turns 500 lava into 240 filtered lava and 30 stone in a foundry over 4 seconds.
     - Lava sluicing uses the metallurgy category and is unlocked by the Tungsten carbide technology.
-    - The filtered lava heating tower burns lhe-filtered-lava instead of raw lava.
+    - The lava heating tower now burns filtered lava instead of raw lava.
   Changes:
-    - Added the startup setting lhe-sluicing-output for filtered lava produced per sluicing craft.
-    - Added the startup setting lhe-sluicing-stone for stone produced per sluicing craft; set it to 0 to disable the stone byproduct.
+    - Added the startup setting vlp-sluicing-output for filtered lava produced per sluicing craft.
+    - Added the startup setting vlp-sluicing-stone for stone produced per sluicing craft; set it to 0 to disable the stone byproduct.
