@@ -1,0 +1,56 @@
+# Lava Heat Extraction
+
+A standalone fork of [Vulcanus Lava Power](https://github.com/lukedupin/vulcanus-lava-power)
+by Orbital917 (Luke Dupin).
+
+## What upstream does
+
+Vulcanus Lava Power adds a Lava Heating Tower: a heating tower variant that burns
+lava as a fluid fuel to produce heat, built from tungsten carbide, pipes and
+copper plate, and unlocked by the Tungsten carbide technology. It also changes
+acid neutralisation to produce 125 degree steam.
+
+## What this fork adds
+
+Lava sluicing. A new `metallurgy` recipe runs in the foundry, taking 500 lava and
+producing 240 filtered lava and 30 stone in 4 seconds, unlocked by the same
+Tungsten carbide technology. The lava heating tower burns `filtered-lava` rather
+than raw lava, so lava has to be sluiced before it becomes fuel, and the stone
+byproduct gives the process a second output.
+
+Two startup settings control the recipe:
+
+- `vlp-sluicing-output`: filtered lava produced per craft.
+- `vlp-sluicing-stone`: stone produced per craft. Set it to 0 to remove the
+  byproduct.
+
+This fork exists because the upstream maintainer preferred a different approach
+to the same problem, so the feature lives here instead.
+
+## Incompatible with the original
+
+This fork keeps upstream's internal prototype names, so the two mods cannot be
+enabled at the same time. `info.json` declares `! vulcanus-lava-power` and
+Factorio will refuse to load both. Pick one.
+
+## License
+
+MIT. See `LICENSE`, which keeps the original copyright notice for Luke Dupin
+alongside the one for this fork.
+
+## Releasing
+
+Bump `version` in `info.json`, add a `changelog.txt` entry, commit, then push a
+matching tag:
+
+    git tag v1.0.1
+    git push origin v1.0.1
+
+Pushing a `v*` tag runs `.github/workflows/publish.yml`, which verifies the tag
+matches the version in `info.json`, builds the mod zip with a single top level
+`lava-heat-extraction_<version>/` directory, and uploads it to the Factorio mod
+portal.
+
+Before the first release, set the `FACTORIO_API_KEY` repository secret to an API
+key created at https://factorio.com/profile with the `ModPortal: Upload Mods`
+usage.

@@ -1,0 +1,87 @@
+name: Publish to mod portal
+
+on:
+  push:
+    tags:
+      - "v*"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    env:
+      MOD_NAME: lava-heat-extraction
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check info.json version matches tag
+        run: |
+          version=$(jq -r .version info.json)
+          tag_version="${GITHUB_REF_NAME#v}"
+          if [ "$version" != "$tag_version" ]; then
+            echo "info.json version ($version) does not match tag $GITHUB_REF_NAME (expected $tag_version)."
+            echo "Portal releases cannot be re-uploaded, so the tag and info.json must agree before publishing."
+            exit 1
+          fi
+          echo "VERSION=$version" >> "$GITHUB_ENV"
+
+      - name: Build mod zip
+        run: |
+          package="${MOD_NAME}_${VERSION}"
+          mkdir -p "build/$package"
+          rsync -a \
+            --exclude='.*' \
+            --exclude='build' \
+            --exclude='README.md' \
+            ./ "build/$package/"
+          (cd build && zip -r "../${package}.zip" "$package")
+          echo "ZIP=${package}.zip" >> "$GITHUB_ENV"
+
+      - name: Verify zip structure
+        run: |
+          expected="${MOD_NAME}_${VERSION}/info.json"
+          if ! unzip -Z1 "$ZIP" | grep -Fxq "$expected"; then
+            echo "Archive $ZIP does not contain $expected at exactly that path."
+            unzip -Z1 "$ZIP"
+            exit 1
+          fi
+
+      - name: Upload release to mod portal
+        env:
+          FACTORIO_API_KEY: ${{ secrets.FACTORIO_API_KEY }}
+        run: |
+          status=$(curl -sS -o init.json -w '%{http_code}' \
+            -X POST \
+            -H "Authorization: Bearer $FACTORIO_API_KEY" \
+            -F "mod=$MOD_NAME" \
+            https://mods.factorio.com/api/v2/mods/releases/init_upload)
+          if [ "$status" != "200" ]; then
+            echo "init_upload failed with HTTP $status:"
+            cat init.json
+            exit 1
+          fi
+
+          upload_url=$(jq -r '.upload_url // empty' init.json)
+          if [ -z "$upload_url" ]; then
+            echo "init_upload returned no upload_url:"
+            cat init.json
+            exit 1
+          fi
+
+          status=$(curl -sS -o finish.json -w '%{http_code}' \
+            -X POST \
+            -F "file=@$ZIP" \
+            "$upload_url")
+          if [ "$status" != "200" ]; then
+            echo "finish_upload failed with HTTP $status:"
+            cat finish.json
+            exit 1
+          fi
+
+          if ! jq -e '.success == true' finish.json > /dev/null; then
+            echo "finish_upload did not report success:"
+            cat finish.json
+            exit 1
+          fi
+
+          echo "Published $ZIP"
