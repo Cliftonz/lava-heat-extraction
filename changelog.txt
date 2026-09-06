@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.3
+Date: 2026-09-06
+  Info:
+    - The mod thumbnail is now included in the release archive, so it shows on the mod portal instead of the placeholder.
+    - This release changes no game behavior; recipes, entities, fluids, settings and locale are byte-identical to 1.0.2.
+---------------------------------------------------------------------------------------------------
 Version: 1.0.2
 Date: 2026-09-06
   Info:
