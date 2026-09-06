@@ -33,6 +33,8 @@ jobs:
             --exclude='.*' \
             --exclude='build' \
             --exclude='README.md' \
+            --exclude='thumbnail.png' \
+            --exclude='tools' \
             ./ "build/$package/"
           (cd build && zip -r "../${package}.zip" "$package")
           echo "ZIP=${package}.zip" >> "$GITHUB_ENV"
