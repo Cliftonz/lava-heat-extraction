@@ -4,7 +4,7 @@
 data:extend({
   {
     type = "int-setting",
-    name = "vlp-power-production",
+    name = "lhe-power-production",
     setting_type = "startup",
     default_value = 40,
     minimum_value = 1,
@@ -13,7 +13,7 @@ data:extend({
   },
   {
     type = "int-setting",
-    name = "vlp-lava-energy",
+    name = "lhe-lava-energy",
     setting_type = "startup",
     default_value = 180,
     minimum_value = 1,
@@ -22,7 +22,7 @@ data:extend({
   },
   {
     type = "int-setting",
-    name = "vlp-sluicing-stone",
+    name = "lhe-sluicing-stone",
     setting_type = "startup",
     default_value = 30,
     minimum_value = 0,
@@ -31,7 +31,7 @@ data:extend({
   },
   {
     type = "int-setting",
-    name = "vlp-sluicing-output",
+    name = "lhe-sluicing-output",
     setting_type = "startup",
     default_value = 240,
     minimum_value = 1,

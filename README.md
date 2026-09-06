@@ -14,24 +14,31 @@ acid neutralisation to produce 125 degree steam.
 
 Lava sluicing. A new `metallurgy` recipe runs in the foundry, taking 500 lava and
 producing 240 filtered lava and 30 stone in 4 seconds, unlocked by the same
-Tungsten carbide technology. The lava heating tower burns `filtered-lava` rather
-than raw lava, so lava has to be sluiced before it becomes fuel, and the stone
-byproduct gives the process a second output.
+Tungsten carbide technology. This mod's Filtered Lava Heating Tower burns
+`lhe-filtered-lava` rather than raw lava, so lava has to be sluiced before it
+becomes fuel, and the stone byproduct gives the process a second output.
 
 Two startup settings control the recipe:
 
-- `vlp-sluicing-output`: filtered lava produced per craft.
-- `vlp-sluicing-stone`: stone produced per craft. Set it to 0 to remove the
+- `lhe-sluicing-output`: filtered lava produced per craft.
+- `lhe-sluicing-stone`: stone produced per craft. Set it to 0 to remove the
   byproduct.
 
 This fork exists because the upstream maintainer preferred a different approach
 to the same problem, so the feature lives here instead.
 
-## Incompatible with the original
+## Runs alongside the original
 
-This fork keeps upstream's internal prototype names, so the two mods cannot be
-enabled at the same time. `info.json` declares `! vulcanus-lava-power` and
-Factorio will refuse to load both. Pick one.
+Every prototype and setting this mod defines is namespaced under `lhe-`, so it no
+longer collides with upstream. `info.json` declares `? vulcanus-lava-power`, an
+optional dependency that does not require upstream but pins load order so this
+mod's `data-final-fixes` runs after upstream's when both are installed. Both mods
+can be enabled at the same time.
+
+Know what that means before you do it. Upstream still makes raw lava directly
+burnable in its own Lava Heating Tower, so with both mods enabled players can
+skip sluicing entirely and burn lava straight from the ground. If you want
+refining to be mandatory, enable this mod on its own.
 
 ## Thumbnail
 

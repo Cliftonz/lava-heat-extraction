@@ -3,11 +3,11 @@ Version: 1.0.0
 Date: 2026-09-06
   Info:
     - Initial release of this fork of Vulcanus Lava Power by Orbital917, renamed to Lava Heat Extraction.
-    - Cannot be enabled alongside vulcanus-lava-power; the two mods define the same prototypes.
+    - Every prototype and setting this mod defines is namespaced under lhe-, so it can be enabled alongside vulcanus-lava-power.
   Features:
-    - Added the filtered-lava fluid and a lava sluicing recipe that turns 500 lava into 240 filtered lava and 30 stone in a foundry over 4 seconds.
+    - Added the lhe-filtered-lava fluid and a lava sluicing recipe that turns 500 lava into 240 filtered lava and 30 stone in a foundry over 4 seconds.
     - Lava sluicing uses the metallurgy category and is unlocked by the Tungsten carbide technology.
-    - The lava heating tower now burns filtered lava instead of raw lava.
+    - The filtered lava heating tower burns lhe-filtered-lava instead of raw lava.
   Changes:
-    - Added the startup setting vlp-sluicing-output for filtered lava produced per sluicing craft.
-    - Added the startup setting vlp-sluicing-stone for stone produced per sluicing craft; set it to 0 to disable the stone byproduct.
+    - Added the startup setting lhe-sluicing-output for filtered lava produced per sluicing craft.
+    - Added the startup setting lhe-sluicing-stone for stone produced per sluicing craft; set it to 0 to disable the stone byproduct.
