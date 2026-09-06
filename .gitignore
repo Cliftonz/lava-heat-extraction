@@ -2,3 +2,5 @@
 build/
 .DS_Store
 __pycache__/
+thumbnail-144.png
+thumbnail-64.png
