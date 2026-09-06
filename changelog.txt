@@ -1,4 +1,10 @@
 ---------------------------------------------------------------------------------------------------
+Version: 1.0.2
+Date: 2026-09-06
+  Info:
+    - Updated the mod description to mention that Lava Heat Extraction can be enabled alongside vulcanus-lava-power, which the 1.0.1 namespacing made possible.
+    - This release changes no game behavior; recipes, entities, fluids, settings and locale are byte-identical to 1.0.1.
+---------------------------------------------------------------------------------------------------
 Version: 1.0.1
 Date: 2026-09-06
   Info:

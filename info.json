@@ -1,11 +1,11 @@
 {
   "name": "lava-heat-extraction",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "factorio_version": "2.0",
   "title": "Lava Heat Extraction",
   "author": "zacclifton",
   "license": "MIT",
-  "description": "A fork of Vulcanus Lava Power by Orbital917 that adds lava sluicing. Sluicing is a foundry recipe that turns 500 raw lava into filtered lava plus stone, and the lava heating tower burns that filtered lava instead of raw lava.",
+  "description": "A fork of Vulcanus Lava Power by Orbital917 that adds lava sluicing. Sluicing filters raw lava in a foundry into burnable filtered lava plus stone. Everything is namespaced, so it can be enabled alongside the original mod.",
   "dependencies": [
     "base >= 2.0.0",
     "space-age >= 2.0.0",
